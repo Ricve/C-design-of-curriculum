@@ -1,6 +1,7 @@
 #include<stdio.h>
-#include<windows.h>
-struct member{
+#include<windows.h>//sleep?
+#include<stdlib.h>//system?
+struct member{//
 	int number;//工资
 	char name[20];//姓名 
 	char gender[2];//性别
@@ -13,8 +14,8 @@ struct member{
 	int rank;//工资排名
 	 
 	
-}staff[100];
-void menu();
+}staff[100];//定义一个全局的结构体数组
+void menu();//主界面函数 
 
 
 int main(){
@@ -22,9 +23,10 @@ int main(){
 	char choice;
 	while(run){
 		menu();//调用界面函数,返回用户选项 
-		choice=_getch();
+		choice=_getch();//读入用户输入，无需敲回车 若输英文 需英文输入法 
 		switch(choice){
-			case '0':
+			case '0'://读入为char，故用'' 
+				printf("即将退出程序\n");
 				run=0;
 				break;
 			case '1':
@@ -47,11 +49,11 @@ int main(){
 				printf("函数6\n"); 
 				break;
 			default:
-				printf("非法输入！\n");
+				printf("非法输入！请重新输入\n");
 				break;
 		}
-		sleep(1);
-		system("cls");
+		sleep(1);//延时 
+		system("cls");//清屏 
 //		system("pause");
 	}
 	return 0;
