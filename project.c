@@ -2,7 +2,7 @@
 #include<windows.h>//sleep?
 #include<stdlib.h>//system?
 struct member{//
-	int number;//工资
+	int number;//工号 
 	char name[20];//姓名 
 	char gender[2];//性别
 	double salary;//基本工资
@@ -15,6 +15,10 @@ struct member{//
 	 
 	
 }staff[100];//定义一个全局的结构体数组
+struct member staff[]={//测试用初始化数据 
+	{1001,"张三","男",3000,500,300,400,2000},
+//	{0},
+};
 void menu();//主界面函数 
 
 
@@ -31,7 +35,9 @@ int main(){
 				break;
 			case '1':
 //				system("cls");
-				printf("函数1\n"); 
+				printf("函数1\n"); /*测试用 展示当前员工列表*/ 
+				printf("%d %s %s %f %f %f %f %f %f %d\n",staff[0].number,staff[0].name,staff[0].gender,staff[0].salary,staff[0].allowance,staff[0].bous,staff[0].fee,staff[0].rent,staff[0].payment,staff[0].rank);
+				system("pause");
 				break;
 			case '2':
 				printf("函数2\n"); 
