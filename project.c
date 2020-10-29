@@ -16,10 +16,10 @@ struct member{//
 	
 }staff[100];//定义一个全局的结构体数组
 int N=0;//N为当前已录入员工数量 
-//struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义 
-//	{1001,"张三","男",3000,500,300,400,2000},//在定义时批量赋值初始化 
-////	{0},
-//};
+struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义 
+	{1001,"张三","男",3000,500,300,400,2000},//在定义时批量赋值初始化 
+//	{0},
+};
 void menu();//主界面函数 
 void insert();
 void mod();
@@ -81,52 +81,64 @@ void insert(){//插入一条员工的信息
 	
 		
 }
-void mod(){
+void mod()
+
+	{
 	int n;
- 	printf("请输入要修改员工的工号");
- 	scanf("%d",&n);
-	int m;
-	 printf("请输入数字1~7:\n"
-	
-	 "1：修改员工姓名；\n"
-	 "2：修改员工性别；\n"
-	 "3：修改员工基本工资；\n"
-	 "4；修改员工补贴；\n"
-	 "5：修改员工奖金；\n"
-	 "6：修改员工水电费；\n"	
-	 "7；修改员工房租；\n");
-	 scanf("%d",&m);
-	 switch(m)
-	 {	
-	 	case 1:
-			printf("请输入要修改后的姓名:");
-	  		scanf("%[^\n]",&staff[n].name);break;
-	  	case 2:
-			printf("请输入修改后的性别:");
-	  		scanf("%[^\n]",&staff[n].gender);break;
-	  case 3:
-			printf("请输入修改后的基本工资：");
-	  		scanf("%ld",&staff[n].salary);break;
-	  case 4:
-	  		printf("请输入修改后的补贴：");
-	  		scanf("%ld",&staff[n].allowance);break;
-	  case 5:
-	  		printf("请输入修改后奖金：");
-	  		scanf("%ld",&staff[n].bous);break;
-	  case 6:
-	  		printf("请输入修改后的水电费：");
-	  		scanf("%ld",&staff[n].fee);break;
-	  case 7:
-	  		printf("请输入修改后的房租：");
-	  		scanf("%ld",&staff[n].rent);break;
-	  default:printf("输入错误");
+	int i;
+	printf("请输入要修改员工的工号");
+	scanf("%d",&n);
+	for(i=0;i<=N;i++){
+	 	if(staff[i].number==n)
+	  	break;
 	 }
-
- if(m>=3&&m<=7){
- staff[n].payment=staff[n].salary+staff[n].allowance+staff[n].bous-staff[n].fee-staff[n].rent;}
-
- printf("修改成功");
-
+	 int m;
+	 printf("请输入数字1~8:\n"
+	"1：修改员工工号；\n" 
+	"2：修改员工姓名；\n"
+	"3：修改员工性别；\n"
+	"4：修改员工基本工资；\n"
+	"5；修改员工补贴；\n"
+	"6：修改员工奖金；\n"
+	"7：修改员工水电费；\n"
+	"8；修改员工房租；\n");
+	
+	scanf("%d",&m);
+	
+	switch(m)
+	
+	 {
+	 	case 1:
+		 	printf("请输入修改后的工号：");
+			scanf("%d",&staff[i].number);break;
+	  case 2:
+		  printf("请输入要修改后的姓名:");
+		  scanf("%s",&staff[i].name);break;
+	  case 3:
+	  	printf("请输入修改后的性别:");
+	  	scanf("%s",&staff[i].gender);break;
+	  case 4:
+	  	printf("请输入修改后的基本工资：");
+	  	scanf("%lf",&staff[i].salary);break;
+	  case 5:
+	  	printf("请输入修改后的补贴：");
+	  	scanf("%lf",&staff[i].allowance);break;
+	  case 6:
+	  	printf("请输入修改后奖金：");
+	  	scanf("%lf",&staff[i].bous);break;
+	  case 7:
+	  	printf("请输入修改后的水电费：");
+	  	scanf("%lf",&staff[i].fee);break;
+	  case 8:
+	  	printf("请输入修改后的房租：");
+	  	scanf("%lf",&staff[i].rent);break;
+	  default:
+	  	printf("输入错误");
+	 }
+	 if(m>=4&&m<=8){
+	 staff[i].payment=staff[i].salary+staff[i].allowance+staff[i].bous-staff[i].fee-staff[i].rent;
+	 }
+	 printf("修改成功");
 }
 void sum(){
 	int i;
@@ -135,11 +147,17 @@ void sum(){
 	}
 	printf("计算完成");
 }
-void delete(){	
-	int n,i;
- 	printf("请输入要删除员工的工号:");
-	 scanf("%d",&n);
-	 for(i=n;i<N;i++){
+void delete(){
+	int n;
+	int i;
+	int k;
+	printf("请输入要删除员工的工号:");
+	scanf("%d",&n);
+	for(i=0;i<=N;i++){
+		if(staff[i].number==n)
+	  		k=i;break;
+	 }
+	 for(i=k;i<N;i++){
 	 	staff[i]=staff[i+1];
 	 }
 	 N--;
