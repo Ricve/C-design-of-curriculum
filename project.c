@@ -49,6 +49,7 @@ int main(){
 				break;
 			case '3':
 				printf("函数3\n"); 
+				insert();
 				break;
 			case '4':
 				printf("函数4\n"); 
@@ -73,17 +74,28 @@ void menu(){
 	printf("这是一个临时界面，请选择1~6,选择0退出程序\n");
 }
 void insert(){//插入一条员工的信息 
-	int i;
-//	for(i=0;i<100;i++){
-//		if(staff[i].number!=0){
-//			
-//		}
+	int i,repeat=1;//repeat判断是否继续插入信息 
+	while(repeat){
+		system("cls");//清屏 
+		printf("请按照下列顺序插入信息，每条信息间空格:\n");
+		printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租\n");
+		scanf("%d %s %s %f %f %f %f %f",&staff[N+1].number,&staff[N+1].name,&staff[N+1].gender,&staff[N+1].salary,&staff[N+1].allowance,&staff[N+1].bous,&staff[N+1].fee,&staff[N+1].rent);
+		//此处调用计算函数 计算出新插入的员工的 实发工资与工资排名
+		N++;
+		printf("是否继续插入？\n 是请输入1\n");
+		scanf("%d",&i);
+		//此处可以插入不显示函数 
+		if(i==1){
+			repeat=1;
+		}else{
+			repeat=0;
+		}
+	}
 	
 		
 }
 void mod()
-
-	{
+{
 	int n;
 	int i;
 	printf("请输入要修改员工的工号");
