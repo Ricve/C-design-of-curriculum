@@ -15,7 +15,7 @@ struct member{//
 	 
 	
 }staff[100];//定义一个全局的结构体数组
-int N=0;//N为当前已录入员工数量 
+int N=4;//N为当前已录入员工数量 
 struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义 
 	{1001,"张三","男",3000,500,300,400,2000},//在定义时批量赋值初始化 
 	{1002,"张四","女",3000,500,300,600,2000},
@@ -29,6 +29,7 @@ void mod();
 void sum();
 void delete();
 void putout(char str[][60],char s[],int l);//弹窗函数 
+void display();
 
 int main(){
 	int run=1;
@@ -61,9 +62,11 @@ int main(){
 				break;
 			case '5':
 				printf("函数5\n"); 
+				display();
 				break;
 			case '6':
 				printf("函数6\n"); 
+				sum(); 
 				break;
 			default:
 				printf("非法输入！请重新输入\n");
@@ -76,7 +79,18 @@ int main(){
 	return 0;
 }
 void menu(){
-	printf("这是一个临时界面，请选择1~6,选择0退出程序\n");
+	printf("这是一个临时界面\n");
+	char title[20]={"请输入数字0~6:"};
+	char dis[7][60]={
+	 	{"1：测试"},
+	 	{"2：删除员工信息"},
+		{"3：插入员工信息"},
+		{"4：修改员工信息"},
+		{"5；展示员工信息"},
+		{"6：计算员工工资"},
+		{"0：退出程序"},
+	 };
+	putout(dis,title,7);
 }
 void insert(){//插入一条员工的信息 
 	int i,repeat=1;//repeat判断是否继续插入信息 
@@ -84,7 +98,7 @@ void insert(){//插入一条员工的信息
 		system("cls");//清屏 
 		printf("请按照下列顺序插入信息，每条信息间空格:\n");
 		printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租\n");
-		scanf("%d %s %s %f %f %f %f %f",&staff[N+1].number,&staff[N+1].name,&staff[N+1].gender,&staff[N+1].salary,&staff[N+1].allowance,&staff[N+1].bous,&staff[N+1].fee,&staff[N+1].rent);
+		scanf("%d %s %s %lf %lf %lf %lf %lf",&staff[N].number,&staff[N].name,&staff[N].gender,&staff[N].salary,&staff[N].allowance,&staff[N].bous,&staff[N].fee,&staff[N].rent);
 		//此处调用计算函数 计算出新插入的员工的 实发工资与工资排名
 		N++;
 		printf("是否继续插入？\n 是请输入1\n");
@@ -243,6 +257,13 @@ void putout(char str[][60],char s[],int l){
 	
 	printf("                  请选择：");//选择界面 
 	fflush(stdin);//清除缓存区
+}
+void display(){
+	int i;
+	for(i=0;i<N;i++){
+		printf("%d %s %s %f %f %f %f %f %f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
+	}
+	system("pause");
 }
 
 
