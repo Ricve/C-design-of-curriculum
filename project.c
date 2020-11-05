@@ -18,6 +18,9 @@ struct member{//
 int N=0;//N为当前已录入员工数量 
 struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义 
 	{1001,"张三","男",3000,500,300,400,2000},//在定义时批量赋值初始化 
+	{1002,"张四","女",3000,500,300,600,2000},
+	{1003,"张五","女",3000,500,300,800,3000},
+	{1004,"张六","男",3000,500,300,900,4000},
 //	{0},
 };
 void menu();//主界面函数 
@@ -25,6 +28,7 @@ void insert();
 void mod();
 void sum();
 void delete();
+void putout(char str[][60],char s[],int l);//弹窗函数 
 
 int main(){
 	int run=1;
@@ -53,6 +57,7 @@ int main(){
 				break;
 			case '4':
 				printf("函数4\n"); 
+				mod();
 				break;
 			case '5':
 				printf("函数5\n"); 
@@ -105,16 +110,27 @@ void mod()
 	  	break;
 	 }
 	 int m;
-	 printf("请输入数字1~8:\n"
-	"1：修改员工工号；\n" 
-	"2：修改员工姓名；\n"
-	"3：修改员工性别；\n"
-	"4：修改员工基本工资；\n"
-	"5；修改员工补贴；\n"
-	"6：修改员工奖金；\n"
-	"7：修改员工水电费；\n"
-	"8；修改员工房租；\n");
-	
+	 char title[20]={"请输入数字1~8:"};
+	 char dis[8][60]={
+	 	{"1：修改员工工号；"},
+	 	{"2：修改员工姓名；"},
+		{"3：修改员工性别；"},
+		{"4：修改员工基本工资；"},
+		{"5；修改员工补贴；"},
+		{"6：修改员工奖金；"},
+		{"7：修改员工水电费；"},
+		{"8；修改员工房租；"} 
+	 };
+//	 printf("请输入数字1~8:\n"
+//	"1：修改员工工号；\n" 
+//	"2：修改员工姓名；\n"
+//	"3：修改员工性别；\n"
+//	"4：修改员工基本工资；\n"
+//	"5；修改员工补贴；\n"
+//	"6：修改员工奖金；\n"
+//	"7：修改员工水电费；\n"
+//	"8；修改员工房租；\n");
+	putout(dis,title,8);
 	scanf("%d",&m);
 	
 	switch(m)
@@ -174,6 +190,59 @@ void delete(){
 	 }
 	 N--;
 	 printf("删除完成");
+}
+void putout(char str[][60],char s[],int l){
+	//            选择内容    标题     选项数量 
+	char t;
+	int i,j,m;
+	int max=0,n=0;	
+	for(i=0;i<l;i++){
+		m=strlen(str[i]);
+		if(max<m)max=m;
+	}
+	m=strlen(s);
+	if(max<m)max=m;//取最大长度 
+	    
+    int length,len_h;
+    len_h=max/2;
+    length=len_h*2+18;//计算弹窗长度
+	
+	int s1,s2;
+	s1=(length-strlen(s))/2;
+	s2=length-strlen(s)-s1;
+	int k1[l],k2[l];
+	for(i=0;i<l;i++){
+		k1[i]=(length-strlen(str[i]))/2;
+		k2[i]=length-strlen(str[i])-k1[i];
+	}//计算居中格式 
+	
+	printf("\n"); printf("\n");printf("\n");printf("\n");printf("\n");
+		
+	printf("                 ┌");
+	for(i=0;i<length/2;i++)printf("—");
+	printf("┐\n");//表格上端
+	
+	printf("                 │");
+	for(i=0;i<s1;i++)printf(" ");
+	printf("%s",s);
+	for(i=0;i<s2;i++)printf(" ");
+	printf("│\n");//标题 	
+
+	for(j=0;j<l;j++){
+	printf("                 │");
+	for(i=0;i<k1[j];i++)printf(" ");
+	printf("%s",str[j]);
+	for(i=0;i<k2[j];i++)printf(" ");
+	printf("│\n");		
+	}//内容	
+	
+	printf("                 └");
+	for(i=0;i<length/2;i++)printf("—");
+	printf("┘\n");//表格下段 	
+	
+	
+	printf("                  请选择：");//选择界面 
+	fflush(stdin);//清除缓存区
 }
 
 
