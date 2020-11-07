@@ -12,7 +12,7 @@ struct member{//
 	double rent;//房租 
 	double payment;//实发工资
 	int rank;//工资排名
-	 
+	
 	
 }staff[100];//定义一个全局的结构体数组
 int N=4;//N为当前已录入员工数量 
@@ -30,6 +30,10 @@ void sum();//计算函数
 void delete();//删除函数 
 void putout(char str[][60],char s[],int l);//弹窗函数 
 void display();//显示函数 
+void BubbleSort(int n);//排序函数,n为选择排序依据
+/*1=工号，2=工资，3=补贴，4=奖金，5=水电费，6=房租，7=实发工资*/ 
+void rank_h();//排名函数，计算每个员工rank 
+
 
 int main(){
 	int run=1;//通过run判断是否循环 
@@ -101,10 +105,9 @@ void insert(){//插入一条员工的信息
 		scanf("%d %s %s %lf %lf %lf %lf %lf",&staff[N].number,&staff[N].name,&staff[N].gender,&staff[N].salary,&staff[N].allowance,&staff[N].bous,&staff[N].fee,&staff[N].rent);
 		N++;
 		sum();//调用计算函数 计算出插入后员工的 实发工资
-		//调用排序函数 
+		rank_h();//调用排序函数 
 		printf("是否继续插入？\n 是请输入1，否输入其他\n");
 		repeat=_getche();
-
 	}
 	
 		
@@ -262,6 +265,40 @@ void display(){
 		printf("%d %s %s %f %f %f %f %f %f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
 	}
 	system("pause");
+}
+void BubbleSort(int n){
+	int i,j;
+	struct member sbb;
+	switch(n){
+		case 1://工号 
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].number<staff[j-1].number){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    break;      
+		case 2://工资 
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].salary<staff[j-1].salary){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    break;      
+		case 3://补贴 
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].allowance<staff[j-1].allowance){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+			break;	  		
+		case 4://奖金 
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].bous<staff[j-1].bous){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    break;
+		case 5://水电费 
+		    for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].fee<staff[j-1].fee){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    break;
+		case 6://房租
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].rent<staff[j-1].rent){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    break;
+		case 7://实发工资
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].payment<staff[j-1].payment){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    break;  			  	  	  				  		          
+	}	
+}
+void rank_h(){
+	int i;
+	BubbleSort(7);
+	for (i=0;i<N;i++){
+		staff[i].rank=i+1;
+	}
 }
 
 
