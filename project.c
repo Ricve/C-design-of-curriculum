@@ -105,12 +105,10 @@ void insert(){//插入一条员工的信息
 		scanf("%d %s %s %lf %lf %lf %lf %lf",&staff[N].number,&staff[N].name,&staff[N].gender,&staff[N].salary,&staff[N].allowance,&staff[N].bous,&staff[N].fee,&staff[N].rent);
 		N++;
 		sum();//调用计算函数 计算出插入后员工的 实发工资
-		rank_h();//调用排序函数 
+//		rank_h();//调用排序函数 
 		printf("是否继续插入？\n 是请输入1，否输入其他\n");
 		repeat=_getche();
-	}
-	
-		
+	}		
 }
 void mod()
 {
@@ -124,7 +122,7 @@ void mod()
 	  	break;
 	 }
 	 int m;
-	 char title[20]={"请输入数字1~8:"};
+	 char title[30]={"请输入数字1~8选择修改选项:"};
 	 char dis[8][60]={
 	 	{"1：修改员工工号；"},
 	 	{"2：修改员工姓名；"},
@@ -145,12 +143,10 @@ void mod()
 //	"7：修改员工水电费；\n"
 //	"8；修改员工房租；\n");
 	putout(dis,title,8);
-	scanf("%d",&m);
-	
+	scanf("%d",&m);	
 	switch(m)
-	
 	 {
-	 	case 1:
+	  case 1:
 		 	printf("请输入修改后的工号：");
 			scanf("%d",&staff[i].number);break;
 	  case 2:
@@ -178,15 +174,17 @@ void mod()
 	  	printf("输入错误");
 	 }
 	 if(m>=4&&m<=8){
-	 staff[i].payment=staff[i].salary+staff[i].allowance+staff[i].bous-staff[i].fee-staff[i].rent;
+	 	staff[i].payment = staff[i].salary+staff[i].allowance+staff[i].bous-staff[i].fee-staff[i].rent;
 	 }
 	 printf("修改成功");
+	 //此处调用显示函数 
 }
 void sum(){
 	int i;
 	for(i=0;i<=N;i++){
 		staff[i].payment=staff[i].salary+staff[i].allowance+staff[i].bous-staff[i].fee-staff[i].rent;
 	}
+	rank_h();//调用排名函数 
 	printf("计算完成");
 }
 void delete(){
@@ -204,7 +202,8 @@ void delete(){
 	 	staff[i]=staff[i+1];
 	 }
 	 N--;
-	 printf("删除完成");
+	 printf("删除完成\n");
+	 display();//此处调用显示函数 
 }
 void putout(char str[][60],char s[],int l){
 	//            选择内容    标题     选项数量 
@@ -256,11 +255,12 @@ void putout(char str[][60],char s[],int l){
 	printf("┘\n");//表格下段 	
 	
 	
-	printf("                  请选择：");//选择界面 
+//	printf("                  请选择：");//选择界面 
 	fflush(stdin);//清除缓存区
 }
 void display(){
 	int i;
+	system("cls"); 
 	for(i=0;i<N;i++){
 		printf("%d %s %s %f %f %f %f %f %f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
 	}
