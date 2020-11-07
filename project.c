@@ -24,21 +24,21 @@ struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义
 //	{0},
 };
 void menu();//主界面函数 
-void insert();
-void mod();
-void sum();
-void delete();
+void insert();//插入函数 
+void mod();//修改函数 
+void sum();//计算函数 
+void delete();//删除函数 
 void putout(char str[][60],char s[],int l);//弹窗函数 
-void display();
+void display();//显示函数 
 
 int main(){
-	int run=1;
+	int run=1;//通过run判断是否循环 
 	char choice;
-	while(run){
-		menu();//调用界面函数,返回用户选项 
+	while(run){ 
+		menu();//调用界面函数,使用户选择选项 
 		choice=_getch();//读入用户输入，无需敲回车 若输英文 需英文输入法 
 		switch(choice){
-			case '0'://读入为char，故用'' 
+			case '0'://读入为char，故需用'' 
 				printf("即将退出程序\n");
 				run=0;
 				break;
@@ -93,22 +93,18 @@ void menu(){
 	putout(dis,title,7);
 }
 void insert(){//插入一条员工的信息 
-	int i,repeat=1;//repeat判断是否继续插入信息 
-	while(repeat){
+	char repeat='1';//repeat判断是否继续插入信息 
+	while(repeat=='1'){
 		system("cls");//清屏 
 		printf("请按照下列顺序插入信息，每条信息间空格:\n");
 		printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租\n");
 		scanf("%d %s %s %lf %lf %lf %lf %lf",&staff[N].number,&staff[N].name,&staff[N].gender,&staff[N].salary,&staff[N].allowance,&staff[N].bous,&staff[N].fee,&staff[N].rent);
-		//此处调用计算函数 计算出新插入的员工的 实发工资与工资排名
 		N++;
-		printf("是否继续插入？\n 是请输入1\n");
-		scanf("%d",&i);
-		//此处可以插入不显示函数 
-		if(i==1){
-			repeat=1;
-		}else{
-			repeat=0;
-		}
+		sum();//调用计算函数 计算出插入后员工的 实发工资
+		//调用排序函数 
+		printf("是否继续插入？\n 是请输入1，否输入其他\n");
+		repeat=_getche();
+
 	}
 	
 		
@@ -117,6 +113,7 @@ void mod()
 {
 	int n;
 	int i;
+	system("cls");
 	printf("请输入要修改员工的工号");
 	scanf("%d",&n);
 	for(i=0;i<=N;i++){
@@ -193,6 +190,7 @@ void delete(){
 	int n;
 	int i;
 	int k;
+	system("cls");
 	printf("请输入要删除员工的工号:");
 	scanf("%d",&n);
 	for(i=0;i<=N;i++){
