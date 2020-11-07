@@ -20,7 +20,7 @@ struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义
 	{1001,"张三","男",3000,500,300,400,2000},//在定义时批量赋值初始化 
 	{1002,"张四","女",3000,500,300,600,2000},
 	{1003,"张五","女",3000,500,300,800,3000},
-	{1004,"张六","男",3000,500,300,900,4000},
+	{1004,"张六","男",3000,500,300,900,4},
 //	{0},
 };
 void menu();//主界面函数 
@@ -33,6 +33,8 @@ void display();//显示函数
 void BubbleSort(int n);//排序函数,n为选择排序依据
 /*1=工号，2=工资，3=补贴，4=奖金，5=水电费，6=房租，7=实发工资*/ 
 void rank_h();//排名函数，计算每个员工rank 
+void print_pass(int t,int n,int m);
+void print_all(); 
 
 
 int main(){
@@ -66,7 +68,7 @@ int main(){
 				break;
 			case '5':
 				printf("函数5\n"); 
-				display();
+				print_all();
 				break;
 			case '6':
 				printf("函数6\n"); 
@@ -300,5 +302,76 @@ void rank_h(){
 		staff[i].rank=i+1;
 	}
 }
-
-
+void print_pass(int t,int n,int m){
+	int i,s;s=n-m;if(t==0){for(i=0;i<s;i++)printf(" ");}
+	else{for(i=0;i<s;i++)printf("--");}}
+//输出调整 
+void print_all(){
+//	void BubbleSort(n);
+	int i,j,m;
+    double m_nam,m_sal,m_all,m_bou,m_fee,m_ren,m_pay;
+    int max_nam=strlen("姓名"),
+	    max_sal=strlen("基本工资")-3,
+		max_all=strlen("补贴")-3,
+		max_bou=strlen("奖金")-3,
+		max_fee=strlen("水电费")-3,
+		max_ren=strlen("房租")-3,
+		max_pay=strlen("实发工资")-3;
+    int s_nam[N],s_sal[N],s_all[N],s_bou[N],s_fee[N],s_ren[N],s_pay[N];
+    for(i=0;i<N;i++){
+    	m_nam=strlen(staff[i].name);s_nam[i]=m_nam;j=0;
+    	if(max_nam<m_nam)max_nam=m_nam;
+    	//计算姓名格式 
+	    m_sal=staff[i].salary;j=0;
+    	while(m_sal>=10){m_sal=m_sal/10;j++;};
+    	s_sal[i]=j;if(max_sal<j)max_sal=j;
+    	//计算工资格式 
+    	m_all=staff[i].allowance;j=0;
+    	while(m_all>=10){m_all=m_all/10;j++;};
+    	s_all[i]=j;if(max_all<j)max_all=j;
+    	//计算补贴格式
+		m_bou=staff[i].bous;j=0;
+		while(m_bou>=10){m_bou=m_bou/10;j++;};
+		s_bou[i]=j;if(max_bou<j)max_bou=j;
+		//计算奖金格式
+		m_fee=staff[i].fee;j=0;
+		while(m_fee>=10){m_fee=m_fee/10;j++;};
+		s_fee[i]=j;if(max_fee<j)max_fee=j;
+		//计算水电费格式
+		m_ren=staff[i].rent;j=0;
+		while(m_ren>=10){m_ren=m_ren/10;j++;};
+		s_ren[i]=j;if(max_ren<j)max_ren=j;
+		//计算房租格式
+		m_pay=staff[i].payment;j=0;
+		while(m_pay>=10){m_pay=m_pay/10;j++;};
+		s_pay[i]=j;if(max_pay<j)max_pay=j;
+		//计算实发工资格式 
+	}
+//	strlen(s)
+    print_pass(1,4,2);print_pass(1,max_nam,0);print_pass(1,4,0);print_pass(1,max_sal,0);print_pass(1,max_all,0);print_pass(1,max_bou,0);print_pass(1,max_fee,0);print_pass(1,max_ren,0);print_pass(1,max_pay,0);print_pass(1,8,0);printf("\n"); 
+    printf("|工号");
+    printf("|姓名");print_pass(0,max_nam,4);
+    printf("|性别");
+	printf("|基本工资");print_pass(0,max_sal,4);
+	printf("|补贴");print_pass(0,max_all+4,4);
+	printf("|奖金");print_pass(0,max_bou+4,4);
+	printf("|水电费");print_pass(0,max_fee+4,6);
+	printf("|房租");print_pass(0,max_ren+4,4);
+	printf("|实发工资");print_pass(0,max_pay+4,8);
+	printf("|工资排名");
+	printf("|\n");
+	for(i=0;i<N;i++){
+		printf("|%d",staff[i].number);
+		printf("|%s",staff[i].name);print_pass(0,max_nam,s_nam[i]);
+		printf("| %s ",staff[i].gender);
+		printf("|%.2f",staff[i].salary);print_pass(0,max_sal,s_sal[i]);
+		printf("|%.2f",staff[i].allowance);print_pass(0,max_all,s_all[i]);
+		printf("|%.2f",staff[i].bous);print_pass(0,max_bou,s_bou[i]);
+		printf("|%.2f",staff[i].fee);print_pass(0,max_fee,s_fee[i]);
+		printf("|%.2f",staff[i].rent);print_pass(0,max_ren,s_ren[i]);
+		printf("|%.2f",staff[i].payment);print_pass(0,max_pay,s_pay[i]);
+		printf("|    %d   |\n",staff[i].rank);
+	} 
+	print_pass(1,4,2);print_pass(1,max_nam,0);print_pass(1,4,0);print_pass(1,max_sal,0);print_pass(1,max_all,0);print_pass(1,max_bou,0);print_pass(1,max_fee,0);print_pass(1,max_ren,0);print_pass(1,max_pay,0);print_pass(1,8,0);printf("\n"); 
+	system("pause");
+}
