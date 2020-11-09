@@ -102,12 +102,11 @@ void insert(){//插入一条员工的信息
 	char repeat='1';//repeat判断是否继续插入信息 
 	while(repeat=='1'){
 		system("cls");//清屏 
-		printf("请按照下列顺序插入信息，每条信息间空格:\n");
+		printf("\n            请按照下列顺序插入信息，每条信息间空格:\n");
 		printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租\n");
 		scanf("%d %s %s %lf %lf %lf %lf %lf",&staff[N].number,&staff[N].name,&staff[N].gender,&staff[N].salary,&staff[N].allowance,&staff[N].bous,&staff[N].fee,&staff[N].rent);
 		N++;
-		sum();//调用计算函数 计算出插入后员工的 实发工资
-//		rank_h();//调用排序函数 
+		print_all();//自动调用显示函数 显示出插入的结果 
 		printf("是否继续插入？\n 是请输入1，否输入其他\n");
 		repeat=_getche();
 	}		
@@ -187,7 +186,6 @@ void sum(){
 		staff[i].payment=staff[i].salary+staff[i].allowance+staff[i].bous-staff[i].fee-staff[i].rent;
 	}
 	rank_h();//调用排名函数 
-	printf("计算完成");
 }
 void delete(){
 	int n;
@@ -315,7 +313,8 @@ void print_pass(int t,int n,int m){
 	else{for(i=0;i<s;i++)printf("--");}}
 //输出调整 
 void print_all(){
-//	void BubbleSort(n);
+	system("cls");
+	sum();
 	int i,j,m;
     double m_nam,m_sal,m_all,m_bou,m_fee,m_ren,m_pay;
     int max_nam=strlen("姓名"),
