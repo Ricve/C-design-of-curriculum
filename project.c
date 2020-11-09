@@ -273,25 +273,33 @@ void BubbleSort(int n){
 	struct member sbb;
 	switch(n){
 		case 1://工号 
-            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].number<staff[j-1].number){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].number>staff[j-1].number){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
 		    break;      
 		case 2://工资 
-            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].salary<staff[j-1].salary){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].salary>staff[j-1].salary){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
 		    break;      
 		case 3://补贴 
-            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].allowance<staff[j-1].allowance){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].allowance>staff[j-1].allowance){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
 			break;	  		
 		case 4://奖金 
-            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].bous<staff[j-1].bous){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].bous>staff[j-1].bous){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
 		    break;
 		case 5://水电费 
-		    for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].fee<staff[j-1].fee){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+		    for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].fee>staff[j-1].fee){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
 		    break;
 		case 6://房租
-            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].rent<staff[j-1].rent){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].rent>staff[j-1].rent){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
 		    break;
 		case 7://实发工资
-            for(i=0;i<N;i++){int t=0;for(j=1;j<N-i;j++){if(staff[j].payment<staff[j-1].payment){sbb=staff[j];staff[j]=staff[j-1];staff[j-1]=sbb;t=1;}}if(t=1)return;}
+            for(i=0;i<N-1;i++){
+				for(j=0;j<N-1-i;j++){
+				    if(staff[j].payment<staff[j+1].payment){
+					    sbb=staff[j];
+						staff[j]=staff[j+1];
+						staff[j+1]=sbb;
+						}
+					}
+				}
 		    break;  			  	  	  				  		          
 	}	
 }
