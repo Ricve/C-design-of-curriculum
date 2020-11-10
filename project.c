@@ -23,7 +23,8 @@ struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义
 	{1004,"张六","男",3000,500,300,900,4},
 //	{0},
 };
-void menu();//主界面函数 
+//void menu();//主界面函数 
+char menu();
 void insert();//插入函数 
 void mod();//修改函数 
 void sum();//计算函数 
@@ -41,9 +42,9 @@ int main(){
 	int run=1;//通过run判断是否循环 
 	char choice;
 	while(run){ 
-		menu();//调用界面函数,使用户选择选项 
-		choice=_getch();//读入用户输入，无需敲回车 若输英文 需英文输入法 
-		switch(choice){
+//		menu();//调用界面函数,使用户选择选项 
+//		choice=_getch();//读入用户输入，无需敲回车 若输英文 需英文输入法 
+		switch(menu()){
 			case '0'://读入为char，故需用'' 
 				printf("即将退出程序\n");
 				run=0;
@@ -84,8 +85,8 @@ int main(){
 	}
 	return 0;
 }
-void menu(){
-	printf("这是一个临时界面\n");
+char menu(){
+//	printf("这是一个临时界面\n");
 	char title[20]={"请输入数字0~6:"};
 	char dis[7][60]={
 	 	{"1：测试1"},
@@ -96,7 +97,39 @@ void menu(){
 		{"6：测试2"},
 		{"0：退出程序"},
 	 };
-	putout(dis,title,7);
+//	putout(dis,title,7);
+	int p;
+	Lab:
+	while( !_kbhit() ) {
+		// run progs
+		//_cputs( "Please Hit me!!\n " );
+		//printf("这是一个字符画\n");
+//		printf("英文输入法按e退出\n");
+//		printf("┌───────────────────┐\n");
+		printf("\n\n         (╯>д<)╯ \n");
+//		printf("│       2.b         │\n");
+//		printf("│       3.c         │\n");
+//		printf("└───────────────────┘\n");
+		putout(dis,title,7);
+		Sleep(100);
+		system("cls");
+//		printf("英文输入法按e退出\n");
+//		printf("┌───────────────────┐\n");
+		printf("\n\n         (╮'ω')╮ \n");
+//		printf("│       2.b         │\n");
+//		printf("│       3.c         │\n");
+//		printf("└───────────────────┘\n");
+		putout(dis,title,7);
+		Sleep(100);
+		system("cls");
+	}
+	p=_getch();
+	if(p == '0'||p == '1'||p == '2'||p == '3'||p == '4'||p == '5'||p == '6'){
+		return p;
+//		printf( "\n已退出动画\n");
+//		sleep(1);
+	}
+	else goto Lab;
 }
 void insert(){//插入一条员工的信息 
 	char repeat='1';//repeat判断是否继续插入信息 
