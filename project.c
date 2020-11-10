@@ -29,12 +29,12 @@ void mod();//修改函数
 void sum();//计算函数 
 void delete();//删除函数 
 void putout(char str[][60],char s[],int l);//弹窗函数 
-void display();//显示函数 
+void display();//测试用显示函数 
 void BubbleSort(int n);//排序函数,n为选择排序依据
 /*1=工号，2=工资，3=补贴，4=奖金，5=水电费，6=房租，7=实发工资*/ 
 void rank_h();//排名函数，计算每个员工rank 
 void print_pass(int t,int n,int m);
-void print_all(); 
+void print_all(); //显示函数 
 
 
 int main(){
@@ -72,7 +72,7 @@ int main(){
 				break;
 			case '6':
 				printf("函数6\n"); 
-				sum(); 
+//				sum(); 
 				break;
 			default:
 				printf("非法输入！请重新输入\n");
@@ -88,12 +88,12 @@ void menu(){
 	printf("这是一个临时界面\n");
 	char title[20]={"请输入数字0~6:"};
 	char dis[7][60]={
-	 	{"1：测试"},
+	 	{"1：测试1"},
 	 	{"2：删除员工信息"},
 		{"3：插入员工信息"},
 		{"4：修改员工信息"},
 		{"5；展示员工信息"},
-		{"6：计算员工工资"},
+		{"6：测试2"},
 		{"0：退出程序"},
 	 };
 	putout(dis,title,7);
