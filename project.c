@@ -188,22 +188,34 @@ void sum(){
 	rank_h();//调用排名函数 
 }
 void delete(){
-	int n;
-	int i;
-	int k;
-	system("cls");
-	printf("请输入要删除员工的工号:");
-	scanf("%d",&n);
-	for(i=0;i<=N;i++){
-		if(staff[i].number==n)
-	  		k=i;break;
-	 }
-	 for(i=k;i<N;i++){
-	 	staff[i]=staff[i+1];
-	 }
-	 N--;
-	 printf("删除完成\n");
-	 display();//此处调用显示函数 
+	 int n;//存储需要删除的工号 
+	 int i;
+	 int find=0;//find用来标记是否找到要删除的工号
+	 int round=1;
+	 while(round){
+	 	system("cls");
+		 printf("请输入要删除员工的工号:");
+		 scanf("%d",&n);
+		 for(i=0;i<N;i++)
+		  {
+		  	if(staff[i].number==n){
+			  find=1;
+			  break;
+		      }
+		  }
+		 if(find==0){
+		   printf("\n    未找到该员工,重新删除请输入1,返回主界面请输入0\n");
+		   scanf("%d",&round); 
+		}
+		 else{
+		   for(;i<=N;i++)
+			  staff[i]=staff[i+1];
+		   	N--;
+	 		printf("     删除完成！\n继续删除请输入1，返回主界面请输入0\n");
+	 		scanf("%d",&round);
+	 		}
+     }
+     print_all();
 }
 void putout(char str[][60],char s[],int l){
 	//            选择内容    标题     选项数量 
