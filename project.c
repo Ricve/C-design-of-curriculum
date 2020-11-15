@@ -40,40 +40,31 @@ void print_all(); //显示函数
 
 int main(){
 	int run=1;//通过run判断是否循环 
-	char choice;
 	while(run){ 
-//		menu();//调用界面函数,使用户选择选项 
-//		choice=_getch();//读入用户输入，无需敲回车 若输英文 需英文输入法 
-		switch(menu()){
+		switch(menu()){//调用界面函数,并传回用户选择选项 
 			case '0'://读入为char，故需用'' 
 				printf("即将退出程序\n");
 				run=0;
 				break;
 			case '1':
 //				system("cls");
-				printf("函数1\n"); /*测试用 展示当前员工列表*/ 
-				printf("%d %s %s %f %f %f %f %f %f %d\n",staff[0].number,staff[0].name,staff[0].gender,staff[0].salary,staff[0].allowance,staff[0].bous,staff[0].fee,staff[0].rent,staff[0].payment,staff[0].rank);
-				system("pause");
+//				printf("函数1\n"); /*测试用 展示当前员工列表*/ 
+//				printf("%d %s %s %f %f %f %f %f %f %d\n",staff[0].number,staff[0].name,staff[0].gender,staff[0].salary,staff[0].allowance,staff[0].bous,staff[0].fee,staff[0].rent,staff[0].payment,staff[0].rank);
+//				system("pause");
+				printf("函数5\n"); 
+				print_all();
 				break;
 			case '2':
 				printf("函数2\n"); 
-				delete(); 
+				insert();
 				break;
 			case '3':
 				printf("函数3\n"); 
-				insert();
+				delete(); 
 				break;
 			case '4':
 				printf("函数4\n"); 
 				mod();
-				break;
-			case '5':
-				printf("函数5\n"); 
-				print_all();
-				break;
-			case '6':
-				printf("函数6\n"); 
-//				sum(); 
 				break;
 			default:
 				printf("非法输入！请重新输入\n");
@@ -81,53 +72,47 @@ int main(){
 		}
 		sleep(1);//延时 
 		system("cls");//清屏 
-//		system("pause");
 	}
 	return 0;
 }
 char menu(){
-//	printf("这是一个临时界面\n");
-	char title[20]={"请输入数字0~6:"};
-	char dis[7][60]={
-	 	{"1：测试1"},
-	 	{"2：删除员工信息"},
-		{"3：插入员工信息"},
-		{"4：修改员工信息"},
-		{"5；展示员工信息"},
-		{"6：测试2"},
-		{"0：退出程序"},
-	 };
-//	putout(dis,title,7);
 	int p;
 	Lab:
 	while( !_kbhit() ) {
-		// run progs
-		//_cputs( "Please Hit me!!\n " );
-		//printf("这是一个字符画\n");
-//		printf("英文输入法按e退出\n");
-//		printf("┌───────────────────┐\n");
-		printf("\n\n         (╯>д<)╯ \n");
-//		printf("│       2.b         │\n");
-//		printf("│       3.c         │\n");
-//		printf("└───────────────────┘\n");
-		putout(dis,title,7);
-		Sleep(100);
-		system("cls");
-//		printf("英文输入法按e退出\n");
-//		printf("┌───────────────────┐\n");
-		printf("\n\n         (╮'ω')╮ \n");
-//		printf("│       2.b         │\n");
-//		printf("│       3.c         │\n");
-//		printf("└───────────────────┘\n");
-		putout(dis,title,7);
-		Sleep(100);
-		system("cls");
+		  printf(" ╭──────────────────────────────────────────────────────────────╮\n");
+		  printf("▕                       员工信息管理系统                        ▏\n");
+		  printf("▕══════════════════════════════════════════════════════════════ ▏\n");
+		  printf("▕                    [输入相应数字进行操作]                     ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕     [1].显示员工信息                [2].新增员工信息          ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕     [3].删除员工信息                [4].修改员工信息          ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕                      [0].退出程序                             ▏\n");
+		  printf("▕                          (╯>д<)╯                             ▏\n");
+		  printf(" ╰──────────────────────────────────────────────────────────────╯\n");
+		  Sleep(100);
+		  system("cls");
+		  printf(" ╭──────────────────────────────────────────────────────────────╮\n");
+		  printf("▕                       员工信息管理系统                        ▏\n");
+		  printf("▕══════════════════════════════════════════════════════════════ ▏\n");
+		  printf("▕                    [输入相应数字进行操作]                     ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕     [1].显示员工信息                [2].新增员工信息          ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕     [3].删除员工信息                [4].修改员工信息          ▏\n");
+		  printf("▕                                                               ▏\n");
+		  printf("▕                      [0].退出程序                             ▏\n");
+		  printf("▕                          (╮'ω')╮                             ▏\n");
+		  printf(" ╰──────────────────────────────────────────────────────────────╯\n");
+	      Sleep(100);
+		  system("cls");
 	}
-	p=_getch();
-	if(p == '0'||p == '1'||p == '2'||p == '3'||p == '4'||p == '5'||p == '6'){
+	p=_getch();////读入用户输入，无需敲回车 若输英文 需英文输入法  
+	if(p>='0'&&p<='4'){
 		return p;
-//		printf( "\n已退出动画\n");
-//		sleep(1);
 	}
 	else goto Lab;
 }
@@ -167,15 +152,6 @@ void mod()
 		{"7：修改员工水电费；"},
 		{"8；修改员工房租；"} 
 	 };
-//	 printf("请输入数字1~8:\n"
-//	"1：修改员工工号；\n" 
-//	"2：修改员工姓名；\n"
-//	"3：修改员工性别；\n"
-//	"4：修改员工基本工资；\n"
-//	"5；修改员工补贴；\n"
-//	"6：修改员工奖金；\n"
-//	"7：修改员工水电费；\n"
-//	"8；修改员工房租；\n");
 	putout(dis,title,8);
 	scanf("%d",&m);	
 	switch(m)
