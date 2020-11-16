@@ -86,6 +86,7 @@ char menu(){
 		  printf("▕                                                               ▏\n");
 		  printf("▕     [3].删除员工信息                [4].修改员工信息          ▏\n");
 		  printf("▕                                                               ▏\n");
+		  printf("▕                                                               ▏\n");
 		  printf("▕     [5].查询员工信息                [0].退出程序              ▏\n");
 		  printf("▕                          (╯>д<)╯                             ▏\n");
 		  printf(" ╰──────────────────────────────────────────────────────────────╯\n");
@@ -100,6 +101,7 @@ char menu(){
 		  printf("▕                                                               ▏\n");
 		  printf("▕                                                               ▏\n");
 		  printf("▕     [3].删除员工信息                [4].修改员工信息          ▏\n");
+		  printf("▕                                                               ▏\n");
 		  printf("▕                                                               ▏\n");
 		  printf("▕     [5].查询员工信息                [0].退出程序              ▏\n");
 		  printf("▕                          (╮'ω')╮                             ▏\n");
