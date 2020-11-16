@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<windows.h>//sleep?
 #include<stdlib.h>//system?
+#include<string.h> 
 struct member{//
 	int number;//工号 
 	char name[20];//姓名 
@@ -15,16 +16,17 @@ struct member{//
 	
 	
 }staff[100];//定义一个全局的结构体数组
-int N=4;//N为当前已录入员工数量 
+int N=7;//N为当前已录入员工数量 
 struct member staff[100]={//测试用初始化数据  若在结构体处定义后不能再重复定义 
 	{1001,"张三","男",3000,500,300,400,2000},//在定义时批量赋值初始化 
-	{1002,"张四","女",3000,500,300,600,2000},
-	{1003,"张五","女",3000,500,300,800,3000},
-	{1004,"张六","男",3000,500,300,900,4},
-//	{0},
+	{1003,"张四","女",4000,500,300,600,2000},
+	{1008,"张五","女",9000,500,300,800,3000},
+	{1002,"张六","男",5000,500,300,400,1000},
+	{1005,"张七","男",4000,500,300,400,1000},
+	{1006,"张八","男",4000,500,300,400,1000},
+	{1004,"张九","男",4000,500,300,600,2000},
 };
-//void menu();//主界面函数 
-char menu();
+char menu();//界面函数 
 void insert();//插入函数 
 void mod();//修改函数 
 void sum();//计算函数 
@@ -36,36 +38,31 @@ void BubbleSort(int n);//排序函数,n为选择排序依据
 void rank_h();//排名函数，计算每个员工rank 
 void print_pass(int t,int n,int m);
 void print_all(); //显示函数 
-
+void search();//搜索函数 
 
 int main(){
 	int run=1;//通过run判断是否循环 
 	while(run){ 
 		switch(menu()){//调用界面函数,并传回用户选择选项 
 			case '0'://读入为char，故需用'' 
-				printf("即将退出程序\n");
+				printf("\n    即将退出程序\n");
 				run=0;
 				break;
 			case '1':
-//				system("cls");
-//				printf("函数1\n"); /*测试用 展示当前员工列表*/ 
-//				printf("%d %s %s %f %f %f %f %f %f %d\n",staff[0].number,staff[0].name,staff[0].gender,staff[0].salary,staff[0].allowance,staff[0].bous,staff[0].fee,staff[0].rent,staff[0].payment,staff[0].rank);
-//				system("pause");
-				printf("函数5\n"); 
 				print_all();
 				break;
 			case '2':
-				printf("函数2\n"); 
 				insert();
 				break;
 			case '3':
-				printf("函数3\n"); 
 				delete(); 
 				break;
 			case '4':
-				printf("函数4\n"); 
 				mod();
 				break;
+			case '5':
+				search();
+				break; 
 			default:
 				printf("非法输入！请重新输入\n");
 				break;
@@ -89,7 +86,7 @@ char menu(){
 		  printf("▕                                                               ▏\n");
 		  printf("▕     [3].删除员工信息                [4].修改员工信息          ▏\n");
 		  printf("▕                                                               ▏\n");
-		  printf("▕                      [0].退出程序                             ▏\n");
+		  printf("▕     [5].查询员工信息                [0].退出程序              ▏\n");
 		  printf("▕                          (╯>д<)╯                             ▏\n");
 		  printf(" ╰──────────────────────────────────────────────────────────────╯\n");
 		  Sleep(100);
@@ -104,14 +101,14 @@ char menu(){
 		  printf("▕                                                               ▏\n");
 		  printf("▕     [3].删除员工信息                [4].修改员工信息          ▏\n");
 		  printf("▕                                                               ▏\n");
-		  printf("▕                      [0].退出程序                             ▏\n");
+		  printf("▕     [5].查询员工信息                [0].退出程序              ▏\n");
 		  printf("▕                          (╮'ω')╮                             ▏\n");
 		  printf(" ╰──────────────────────────────────────────────────────────────╯\n");
 	      Sleep(100);
 		  system("cls");
 	}
 	p=_getch();////读入用户输入，无需敲回车 若输英文 需英文输入法  
-	if(p>='0'&&p<='4'){
+	if(p>='0'&&p<='5'){
 		return p;
 	}
 	else goto Lab;
@@ -375,6 +372,8 @@ void rank_h(){
 	BubbleSort(7);
 	for (i=0;i<N;i++){
 		staff[i].rank=i+1;
+		if(staff[i].payment==staff[i-1].payment)
+			staff[i].rank=staff[i-1].rank;
 	}
 }
 void print_pass(int t,int n,int m){
@@ -450,4 +449,111 @@ void print_all(){
 	} 
 	print_pass(1,4,2);print_pass(1,max_nam,0);print_pass(1,4,0);print_pass(1,max_sal,0);print_pass(1,max_all,0);print_pass(1,max_bou,0);print_pass(1,max_fee,0);print_pass(1,max_ren,0);print_pass(1,max_pay,0);print_pass(1,8,0);printf("\n"); 
 	system("pause");
+}
+void search(){
+	int choice,i,found=0,run=1,times;
+	int s_id,s_rank;
+	char s_name[20];//姓名 
+	char s_gender[2];//性别
+	sum();
+	char title[30]={"请输入数字1~4选择查询项:"};
+	char dis[4][60]={
+	 	{"1：按照员工工号查询；"},
+	 	{"2：按照员工姓名查询；"},
+		{"3：按照员工性别查询；"},
+		{"4：按照工资排名查询；"},
+	 };
+	putout(dis,title,4);
+	scanf("%d",&choice);
+	switch(choice){
+		case 1:
+			while(run){
+				system("cls");
+				printf("请输入需要查询的员工工号:\n");
+				scanf("%d",&s_id);
+				for(i=0,times=0,found=0;i<N;i++){
+					if(staff[i].number==s_id){
+						found=1;
+						break;
+					}
+				}
+				if(found==1){
+					printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租 | 实发工资 | 工资排名\n");
+				 	printf("%d  %s  %s  %.2f  %.2f  %.2f  %.2f  %.2f %.2f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
+				}else{
+					printf("\n\n     未找到该员工,请检查后重新输入！\n\n");
+				}
+				printf("是否继续按工号查询？是请输入1，否请输入0\n");
+				scanf("%d",&run);
+			}
+			break;
+		case 2:
+			while(run){
+				system("cls");
+				printf("请输入需要查询的员工姓名:\n");
+				scanf("%s",s_name);
+				for(i=0,times=0,found=0;i<N;i++){
+					if(strcmp(s_name,staff[i].name)==0){
+						found=1;
+						break;
+					}
+				}
+				if(found==1){
+					printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租 | 实发工资 | 工资排名\n");
+					printf("%d  %s  %s  %.2f  %.2f  %.2f  %.2f  %.2f %.2f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
+				}else{
+					printf("\n\n     未找到该员工,请检查后重新输入！\n\n");
+				}
+				printf("是否继续按姓名查询？是请输入1，否请输入0\n");
+				scanf("%d",&run);
+			}
+			break;
+		case 3:
+			while(run){
+				system("cls");
+				printf("请输入需要查询的员工性别:\n");
+				scanf("%s",s_gender);
+				for(i=0,times=0,found=0;i<N;i++){
+					if(strcmp(s_gender,staff[i].gender)==0){
+						found=1;
+						times++;
+						if(times==1){
+							printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租 | 实发工资 | 工资排名\n");
+						}
+						printf("%d  %s  %s  %.2f  %.2f  %.2f  %.2f  %.2f %.2f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
+					}
+				}
+				if(found==0){
+					printf("\n\n     未找到该员工,请检查后重新输入！\n\n");
+				}
+				printf("是否继续按性别查询？是请输入1，否请输入0\n");
+				scanf("%d",&run);
+			}
+			break;
+		case 4:
+			while(run){
+				system("cls");
+				printf("请输入需要查询的员工排名:\n");
+				scanf("%d",&s_rank);
+				for(i=0,times=0,found=0;i<N;i++){
+					if(staff[i].rank==s_rank){
+						found=1;
+						times++;
+						if(times==1){
+							printf("工号 | 姓名 | 性别 | 基本工资 | 补贴 | 奖金 | 水电费 | 房租 | 实发工资 | 工资排名\n");
+						}
+						printf("%d  %s  %s  %.2f  %.2f  %.2f  %.2f  %.2f %.2f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
+					}
+				}
+				if(found==0){
+					printf("\n\n     未找到该员工,请检查后重新输入！\n\n");
+				}
+				printf("是否继续按排名查询？是请输入1，否请输入0\n");
+				scanf("%d",&run);
+			}
+			break;
+		default:
+			printf("输入有误！");
+			break;
+	}
 }
