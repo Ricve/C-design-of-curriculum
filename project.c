@@ -32,7 +32,6 @@ void mod();//修改函数
 void sum();//计算函数 
 void delete();//删除函数 
 void putout(char str[][60],char s[],int l);//弹窗函数 
-void display();//测试用显示函数 
 void BubbleSort(int n);//排序函数,n为选择排序依据
 /*1=工号，2=工资，3=补贴，4=奖金，5=水电费，6=房租，7=实发工资*/ 
 void rank_h();//排名函数，计算每个员工rank 
@@ -277,14 +276,6 @@ void putout(char str[][60],char s[],int l){
 	
 //	printf("                  请选择：");//选择界面 
 	fflush(stdin);//清除缓存区
-}
-void display(){
-	int i;
-	system("cls"); 
-	for(i=0;i<N;i++){
-		printf("%d %s %s %f %f %f %f %f %f %d\n",staff[i].number,staff[i].name,staff[i].gender,staff[i].salary,staff[i].allowance,staff[i].bous,staff[i].fee,staff[i].rent,staff[i].payment,staff[i].rank);
-	}
-	system("pause");
 }
 void BubbleSort(int n){
 	int i,j;
